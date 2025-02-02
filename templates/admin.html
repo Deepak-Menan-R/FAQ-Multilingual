@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- CKEditor Script -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+</head>
+<style>
+    /* Admin Dashboard Styles */
+h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-top: 30px;
+}
+
+form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    font-weight: bold;
+}
+
+ul {
+    padding-left: 0;
+    margin-top: 20px;
+}
+
+ul li {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+ul li a {
+    color: #e74c3c;
+    text-decoration: none;
+}
+
+ul li a:hover {
+    color: #c0392b;
+}
+
+button[type="submit"] {
+    width: 100%;
+    margin-top: 20px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+}
+
+</style>
+<body>
+    <h1>Admin Dashboard</h1>
+    <p>Welcome, Admin. Your email is: {{ email }}</p> 
+    <h2>Add New FAQ</h2>
+    <form action="/add_faq" method="post">
+        <label for="question">Question:</label>
+        <input type="text" name="question" id="question" required>
+        
+        <label for="answer">Answer:</label>
+        <textarea name="answer" id="answer"></textarea>
+        
+        <button type="submit">Add FAQ</button>
+    </form>
+    
+    <h2>Existing FAQs</h2>
+<ul>
+    {% for faq in faqs %}
+        <li>
+            <strong>{{ faq[1] }}</strong><br>
+            <div>{{ faq[2] | safe }}</div> 
+            <a href="{{ url_for('edit_faq', faq_id=faq[0]) }}">Edit</a>
+        </li>
+    {% endfor %}
+</ul>
+
+
+    <a href="/logout">Logout</a>
+
+    <script>
+        let editorInstance;
+    
+        // Initialize CKEditor for the answer textarea
+        ClassicEditor
+        .create(document.querySelector('#answer'))
+        .then(editor => {
+            editorInstance = editor; // Store the editor instance
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    
+        // Ensure CKEditor content is synced back to the textarea before form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            if (editorInstance) {
+                // Manually update the textarea value before form submission
+                const answerField = document.querySelector('#answer');
+                answerField.value = editorInstance.getData();
+            }
+        });
+    </script>
+    
+    
+    
+</body>
+</html>

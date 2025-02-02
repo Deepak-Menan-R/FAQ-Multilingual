@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit FAQ</title>
+    <!-- CKEditor Script -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+</head>
+<style>
+    /* Edit FAQ Page Styles */
+h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+form input[type="text"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+form button[type="submit"] {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+form button[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+a {
+    display: block;
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #3498db;
+}
+
+</style>
+<body>
+    <h1>Edit FAQ</h1>
+    <form action="{{ url_for('update_faq', faq_id=faq[0]) }}" method="post">
+        <label for="question">Question:</label>
+        <input type="text" name="question" id="question" value="{{ faq[1] }}" required>
+        
+        <label for="answer">Answer:</label>
+        <textarea name="answer" id="answer" required>{{ faq[2] | safe}}</textarea>
+        
+        <button type="submit">Update FAQ</button>
+    </form>
+
+    <a href="{{ url_for('admin') }}">Back to Admin Dashboard</a>
+
+    <script>
+        // Initialize CKEditor for the answer textarea
+        ClassicEditor
+            .create(document.querySelector('#answer'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+</body>
+</html>

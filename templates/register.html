@@ -1,0 +1,50 @@
+<!--Register.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<style>
+    /* Register Page Styles */
+form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+    margin-bottom: 20px;
+}
+
+form button {
+    width: 100%;
+}
+
+p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+</style>
+<body>
+    <h1>Register</h1>
+    <form action="/register" method="post">
+        <label for="name">Full Name</label>
+        <input type="text" name="name" id="name" required>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+        <button type="submit">Register</button>
+    </form>    
+    <p>Already have an account? <a href="/login">Login</a></p>
+</body>
+</html>

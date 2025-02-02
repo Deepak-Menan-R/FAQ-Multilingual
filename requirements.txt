@@ -1,0 +1,8 @@
+flask 
+flask-ckeditor
+googletrans==4.0.0-rc1
+bs4
+redis
+flask-caching
+pytest 
+flask-testing

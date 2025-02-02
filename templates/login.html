@@ -1,0 +1,52 @@
+<!--Login.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<style>
+    /* Login Page Styles */
+form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    font-weight: bold;
+}
+
+form input[type="email"],
+form input[type="password"] {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+form button {
+    width: 100%;
+}
+
+p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+</style>
+<body>
+    <h1>Login</h1>
+    <form action="/login" method="post">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+        <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="/register">Register</a></p>
+</body>
+</html>
