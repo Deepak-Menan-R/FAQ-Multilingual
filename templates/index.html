@@ -1,3 +1,4 @@
+<!--Index.html-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,70 +6,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
     <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 700px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            position: relative; /* To position the logout button inside the container */
+        }
+        h2 {
+            font-size: 1.75rem;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .faq-item {
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+        .faq-item strong {
+            color: #34495e;
+        }
+        .logout-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #dc3545;
+            text-decoration: none;
+        }
+        .logout-link:hover {
+            color: #a71d2a;
+        }
+    </style>
 </head>
-<style>
-h2 {
-    font-size: 2rem;
-    color: #2c3e50;
-    margin-bottom: 20px;
-}
-
-select {
-    width: 150px;
-    padding: 10px;
-    margin-bottom: 20px;
-    font-size: 1rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-ul {
-    padding-left: 0;
-}
-
-ul li {
-    margin-bottom: 15px;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 6px;
-    border: 1px solid #eee;
-}
-
-ul li strong {
-    font-weight: bold;
-    color: #34495e;
-}
-
-a {
-    font-size: 1rem;
-    display: block;
-    margin-top: 20px;
-}
-
-</style>
 <body>
 
-    <label for="language">Select Language:</label>
-    <select name="language" id="language" onchange="translateFAQs()">
-        <option value="en" {% if lang == 'en' %}selected{% endif %}>English</option>
-        <option value="fr" {% if lang == 'fr' %}selected{% endif %}>French</option>
-        <option value="es" {% if lang == 'es' %}selected{% endif %}>Spanish</option>
-        <option value="de" {% if lang == 'de' %}selected{% endif %}>German</option>
-        <option value="hi" {% if lang == 'hi' %}selected{% endif %}>Hindi</option>
-        <option value="ta" {% if lang == 'ta' %}selected{% endif %}>Tamil</option>
-    </select>
+    <div class="container">
+        <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
 
-    <h2>Frequently Asked Questions</h2>
-    <ul>
-        {% for question, answer in faqs %}
-            <li>
-                <strong>{{ question }}</strong><br>
-                {{ answer | safe }}
-            </li>
-        {% endfor %}
-    </ul>
-    
-    <a href="{{ url_for('logout') }}">Logout</a>
+        <div class="mb-3 text-center">
+            <label for="language" class="form-label">Select Language:</label>
+            <select class="form-select w-50 mx-auto" name="language" id="language" onchange="translateFAQs()">
+                <option value="en" {% if lang == 'en' %}selected{% endif %}>English</option>
+                <option value="fr" {% if lang == 'fr' %}selected{% endif %}>French</option>
+                <option value="es" {% if lang == 'es' %}selected{% endif %}>Spanish</option>
+                <option value="de" {% if lang == 'de' %}selected{% endif %}>German</option>
+                <option value="hi" {% if lang == 'hi' %}selected{% endif %}>Hindi</option>
+                <option value="ta" {% if lang == 'ta' %}selected{% endif %}>Tamil</option>
+            </select>
+        </div>
+
+        <h2>Frequently Asked Questions</h2>
+        <ul class="list-unstyled">
+            {% for question, answer in faqs %}
+                <li class="faq-item">
+                    <strong>{{ question }}</strong><br>
+                    {{ answer | safe }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 
     <script>
         function translateFAQs() {
@@ -77,5 +84,6 @@ a {
         }
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
