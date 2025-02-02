@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit FAQ</title>
-    <!-- CKEditor Script -->
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 </head>
 <style>
-    /* Edit FAQ Page Styles */
 h1 {
     font-size: 2rem;
     color: #2c3e50;
@@ -76,7 +74,6 @@ a {
     <a href="{{ url_for('admin') }}">Back to Admin Dashboard</a>
 
     <script>
-        // Initialize CKEditor for the answer textarea
         ClassicEditor
             .create(document.querySelector('#answer'))
             .catch(error => {
