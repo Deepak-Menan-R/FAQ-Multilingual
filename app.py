@@ -123,6 +123,23 @@ def edit_faq(faq_id):
 
     return render_template('edit_faq.html', faq=faq)
 
+@app.route('/del_faq/<int:faq_id>', methods=['POST'])
+def del_faq(faq_id):
+    if 'user' not in session or session['role'] != 'Admin':
+        return redirect(url_for('login'))
+
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM faqs WHERE id = ?", (faq_id,))
+            conn.commit()
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
+        return "Error deleting FAQ from the database."
+
+    return redirect(url_for('admin'))
+
+
 @app.route('/update_faq/<int:faq_id>', methods=['POST'])
 def update_faq(faq_id):
     if 'user' not in session or session['role'] != 'Admin':
